@@ -125,6 +125,7 @@ public class JsonRender {
 		while(iterator.hasNext()) {
 			this.appendPojoItem(iterator.next(), iterator.hasNext(),  indentOffset);
 		}
+
 		this.jsonFormat.decreaseIndent();
 		this.stringBuilder.append("]");
 	}
