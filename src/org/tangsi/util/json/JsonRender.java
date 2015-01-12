@@ -1,6 +1,8 @@
 package org.tangsi.util.json;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -11,6 +13,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.tangsi.util.Mirror;
 
@@ -48,7 +53,9 @@ public class JsonRender {
 			
 		}else if(Boolean.class == clazz) { //布尔类型
 			this.stringBuilder.append(((Boolean)object).booleanValue());
-		}else if(mirror.isNumberLike()) {  //类数字
+		}else if(AtomicBoolean.class == clazz) {  //布尔类型
+            this.stringBuilder.append(((AtomicBoolean) object).get());
+        }else if(mirror.isNumberLike()) {  //类数字
 			if(Byte.class == clazz) {
 				this.stringBuilder.append(((Byte)object).byteValue());
 			}else if(Short.class == clazz) {
@@ -63,7 +70,15 @@ public class JsonRender {
 				this.stringBuilder.append(((Float)object).floatValue());
 			}else if(Number.class == clazz) {
 				this.stringBuilder.append(((Number)object).doubleValue());
-			}
+			}else if(BigDecimal.class == clazz) {
+                this.stringBuilder.append(((BigDecimal) object).doubleValue());
+            }else if(BigInteger.class == clazz) {
+                this.stringBuilder.append(((BigInteger) object).intValue());
+            }else if(AtomicInteger.class == clazz) {
+                this.stringBuilder.append(((AtomicInteger) object).intValue());
+            }else if(AtomicLong.class == clazz) {
+                this.stringBuilder.append(((AtomicLong) object).longValue());
+            }
 		}else if(Map.class.isAssignableFrom(clazz)) {  //map
 			map2Json(object);
 		}else if(Collection.class.isAssignableFrom(clazz)) { //Collection
