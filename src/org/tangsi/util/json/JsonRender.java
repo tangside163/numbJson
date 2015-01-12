@@ -123,13 +123,13 @@ public class JsonRender {
 		Iterator iterator = ((Collection)object).iterator();
 		String indentOffset = this.getCurrentIndentOffset();
 		while(iterator.hasNext()) {
-			this.appendPojoItem(iterator.hasNext(), iterator.next(), indentOffset);
+			this.appendPojoItem(iterator.next(), iterator.hasNext(),  indentOffset);
 		}
 		this.jsonFormat.decreaseIndent();
 		this.stringBuilder.append("]");
 	}
 
-	private void appendPojoItem(boolean hasNext, Object object,
+	private void appendPojoItem(Object object, boolean hasNext,
 			String indentOffset) {
 		this.stringBuilder.append(indentOffset);
 		this.render(object);
