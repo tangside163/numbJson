@@ -145,6 +145,7 @@ public class JsonRender {
 		}
 
 		this.jsonFormat.decreaseIndent();
+		this.stringBuilder.append(this.getCurrentIndentOffset());
 		this.stringBuilder.append("]");
 	}
 
