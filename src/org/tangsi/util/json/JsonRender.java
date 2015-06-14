@@ -81,7 +81,7 @@ public class JsonRender {
 		}else if(Map.class.isAssignableFrom(clazz)) {  //map
 			map2Json(object);
 		}else if(Collection.class.isAssignableFrom(clazz)) { //Collection
-			this.collection2Json(object);
+			this.collection2Json((Collection) object);
 		}else if(clazz.isArray()) {  //数组
 			//先转成集合，复用代码
 			List list = Arrays.asList((Object[])object);
@@ -131,8 +131,8 @@ public class JsonRender {
 		this.stringBuilder.append(this.getCurrentIndentOffset()).append("}");
 	}
 
-	private void collection2Json(Object object) {
-		Iterator iterator = ((Collection)object).iterator();
+	private void collection2Json(Collection collection) {
+		Iterator iterator = collection.iterator();
 		if(!iterator.hasNext()) {
 			this.stringBuilder.append("[]");
 			return;
